@@ -7,9 +7,9 @@
 - [Demo](#Demo)
 - [Usage](#Usage)
 - [Contributors](#Contributors)
-- [Project Status](#Project Status)
+- [Project Status](#Project-Status)
 - [Roadmap](#Roadmap)
-- [Additional Resources](#Additional Resources)
+- [Additional Resources](#Additional-Resources)
 
 
 ## Introduction
