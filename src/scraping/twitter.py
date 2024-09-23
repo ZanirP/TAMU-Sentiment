@@ -29,8 +29,9 @@ def save_tweets(tweets, file_path):
     else:
         # Write mode if the file does not exist
         df.to_csv(file_path, mode='w', header=True, index=False)
+    print(f"Saved {len(tweets)} tweets to {file_path}")
 
-async def scrape_tweets(username, password, filepath):
+async def scrape_tweets(username, password, filepath,search_query):
     client = Client('en-US')
 
     try:
@@ -40,7 +41,7 @@ async def scrape_tweets(username, password, filepath):
 
         print("TIME TO SCRAPE")
 
-        timeline = await client.search_tweet('#12thMan', 'Top')
+        timeline = await client.search_tweet(search_query, 'Top')
 
         print("GOT TIMELINE")
 
@@ -78,8 +79,6 @@ async def scrape_tweets(username, password, filepath):
         print(f"An error occurred: {e}")
 
 if __name__ == '__main__':
-    
-
     # Read credentials from config file
     config = ConfigParser()
     config.read('TAMU-Sentiment/config.ini')
@@ -89,12 +88,8 @@ if __name__ == '__main__':
 
     file_path = 'TAMU-Sentiment/data/raw-data/hs_tweets_12thman.csv'
 
+    search_query = '#12thMan'
+
     # Run the scraper asynchronously
-    tweets = asyncio.run(scrape_tweets(username, password,file_path))
+    tweets = asyncio.run(scrape_tweets(username, password,file_path, search_query))
     print("scrapper ran")
-
-    # Add tweets to a CSV file
-    # Define the file path
-
-    save_tweets(tweets, file_path)
-    print("tweets saved")
