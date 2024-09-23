@@ -46,6 +46,7 @@ async def scrape_tweets(username, password):
     except twikit.TooManyRequests as e:
         print(f"Rate limit reached: {e}")
         # Implement your rate limit handling strategy here
+        await client.logout()
         return tweets
     except Exception as e:
         print(f"An error occurred: {e}")
