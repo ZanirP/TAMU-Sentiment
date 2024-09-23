@@ -13,6 +13,7 @@ async def scrape_tweets(username, password):
     try:
         # Login using your Twitter credentials
         await client.login(auth_info_1=username, password=password)
+        tweets = []
 
         print("TIME TO SCRAPE")
 
@@ -20,16 +21,20 @@ async def scrape_tweets(username, password):
 
         print("GOT TIMELINE")
 
-        tweets = []
-        for tweet in timeline:
-            tweets.append({
-                'text': tweet.text,
-                'timestamp': tweet.created_at,
-                'likes': tweet.favorite_count,
-                'retweets': tweet.retweet_count,
-                # Add other fields as needed
-            })
-            print(tweet)
+        n = 40  # Number of passes
+        
+        for i in range(n):
+            for tweet in timeline:
+                tweets.append({
+                    'text': tweet.text,
+                    'timestamp': tweet.created_at,
+                    'likes': tweet.favorite_count,
+                    'retweets': tweet.retweet_count,
+                    # Add other fields as needed
+                })
+                print(f"pass: {i}, total tweets: \t {len(tweets)}")
+            timeline = await timeline.next()
+
 
         print("GOT TWEETS")
 
@@ -41,13 +46,13 @@ async def scrape_tweets(username, password):
     except twikit.TooManyRequests as e:
         print(f"Rate limit reached: {e}")
         # Implement your rate limit handling strategy here
-
+        return tweets
     except Exception as e:
         print(f"An error occurred: {e}")
 
 # Read credentials from config file
 config = ConfigParser()
-config.read('config.ini')
+config.read('/home/hasnat79/TAMU-Sentiment/config.ini')
 username = config['X']['username']
 email = config['X']['email']
 password = config['X']['password']  # Replace with your actual password
@@ -58,7 +63,7 @@ print("scrapper ran")
 
 # Add tweets to a CSV file
 # Define the file path
-file_path = 'tweets.csv'
+file_path = '/home/hasnat79/TAMU-Sentiment/data/raw-data/hs_tweets.csv'
 
 # Create a DataFrame from the tweets
 df = pd.DataFrame(tweets)
