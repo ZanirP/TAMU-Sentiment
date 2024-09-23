@@ -21,9 +21,9 @@ async def scrape_tweets(username, password):
 
         print("GOT TIMELINE")
 
-        n = 40  # Number of passes
+        n_passes = 40  # Number of passes
         
-        for i in range(n):
+        for i in range(n_passes):
             for tweet in timeline:
                 tweets.append({
                     'text': tweet.text,
