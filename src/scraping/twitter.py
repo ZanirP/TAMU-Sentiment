@@ -7,7 +7,7 @@ import twikit
 from twikit import Client
 
 
-async def scrape_tweets(username, password):
+async def scrape_tweets(username, password, word):
     client = Client('en-US')
 
     try:
@@ -16,7 +16,7 @@ async def scrape_tweets(username, password):
 
         print("TIME TO SCRAPE")
 
-        timeline = await client.search_tweet('Texas A&M', 'Top')
+        timeline = await client.search_tweet(word, 'Top')
 
         print("GOT TIMELINE")
 
@@ -45,28 +45,30 @@ async def scrape_tweets(username, password):
     except Exception as e:
         print(f"An error occurred: {e}")
 
-# Read credentials from config file
-config = ConfigParser()
-config.read('config.ini')
-username = config['X']['username']
-email = config['X']['email']
-password = config['X']['password']  # Replace with your actual password
 
-# Run the scraper asynchronously
-tweets = asyncio.run(scrape_tweets(username, password))
-print("scrapper ran")
+if __name__ == "__main__":
+    # Read credentials from config file
+    config = ConfigParser()
+    config.read('config.ini')
+    username = config['X']['username']
+    email = config['X']['email']
+    password = config['X']['password']  # Replace with your actual password
 
-# Add tweets to a CSV file
-# Define the file path
-file_path = 'tweets.csv'
+    # Run the scraper asynchronously
+    tweets = asyncio.run(scrape_tweets(username, password, "Fightin' Texas Aggies"))
+    print("scrapper ran")
 
-# Create a DataFrame from the tweets
-df = pd.DataFrame(tweets)
+    # Add tweets to a CSV file
+    # Define the file path
+    file_path = 'data/raw-data/fight_aggies_tweets.csv'
 
-# Check if the file already exists
-if os.path.exists(file_path):
-    # Append mode if the file exists
-    df.to_csv(file_path, mode='a', header=False, index=False)
-else:
-    # Write mode if the file does not exist
-    df.to_csv(file_path, mode='w', header=True, index=False)
+    # Create a DataFrame from the tweets
+    df = pd.DataFrame(tweets)
+
+    # Check if the file already exists
+    if os.path.exists(file_path):
+        # Append mode if the file exists
+        df.to_csv(file_path, mode='a', header=False, index=False)
+    else:
+        # Write mode if the file does not exist
+        df.to_csv(file_path, mode='w', header=True, index=False)

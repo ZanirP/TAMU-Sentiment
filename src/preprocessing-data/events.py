@@ -178,7 +178,6 @@ def preprocess_text(text):
     return text
 
     
-    return text
 
 def group_and_preprocess(df):
     """
@@ -215,10 +214,16 @@ def group_and_preprocess(df):
         
         
 if __name__ == "__main__":
-    input_file_path = "data/raw-data/tweets.csv"
+    input_file_paths = [
+        "data/raw-data/tweets.csv",
+        "data/raw-data/fight_aggies_tweets.csv",
+        "data/raw-data/football1_tweets.csv",
+        "data/raw-data/football2_tweets.csv"
+    ]
     output_file_path = "data/processed-data/tweets.csv"
     
-    df = pd.read_csv(input_file_path)
+    df_list = [pd.read_csv(file_path) for file_path in input_file_paths]
+    df = pd.concat(df_list, ignore_index=True)
     
     events = build_event_dictionary(df)
     df['event'] = df['text'].apply(identify_event)
@@ -226,6 +231,8 @@ if __name__ == "__main__":
     print(df)
         
     # TODO Figure out a way to deal with the inaccuracy of this method
+    
+    ## TODO clear NaN values of text
     
     grouped_and_preprocessed_df = group_and_preprocess(df)
     
