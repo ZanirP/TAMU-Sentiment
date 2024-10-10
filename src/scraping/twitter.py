@@ -57,7 +57,7 @@ async def scrape_tweets(username, password, filepath,search_query):
                     # Add other fields as needed
                 })
             print(f"pass: {i}, total tweets: \t {len(tweets)}")
-            if i == 40:
+            if i % 40 == 0 and i!=0:
                 save_tweets(tweets, filepath)
                 tweets = []
                 await asyncio.sleep(900)  # Wait for 15 minutes (900 seconds)
@@ -73,7 +73,7 @@ async def scrape_tweets(username, password, filepath,search_query):
     except twikit.TooManyRequests as e:
         print(f"Rate limit reached: {e}")
         # Implement your rate limit handling strategy here
-
+        save_tweets(tweets, filepath)
 
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -81,14 +81,14 @@ async def scrape_tweets(username, password, filepath,search_query):
 if __name__ == '__main__':
     # Read credentials from config file
     config = ConfigParser()
-    config.read('TAMU-Sentiment/config.ini')
+    config.read('/home/hasnat79/TAMU-Sentiment/config.ini')
     username = config['X']['username']
     email = config['X']['email']
     password = config['X']['password']  # Replace with your actual password
 
-    file_path = 'TAMU-Sentiment/data/raw-data/hs_tweets_12thman.csv'
+    file_path = '/home/hasnat79/TAMU-Sentiment/data/raw-data/hs_tweets_nfl_aggies_hashtags.csv'
 
-    search_query = '#12thMan'
+    search_query = '#GigEm #NFLAggies'
 
     # Run the scraper asynchronously
     tweets = asyncio.run(scrape_tweets(username, password,file_path, search_query))
