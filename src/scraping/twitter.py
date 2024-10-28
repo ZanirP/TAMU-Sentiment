@@ -34,6 +34,7 @@ async def scrape_tweets(username, password, word):
         print("GOT TWEETS")
 
         return tweets
+    
 
         # Logout (optional)
         await client.logout()
@@ -50,8 +51,8 @@ if __name__ == "__main__":
     # Read credentials from config file
     config = ConfigParser()
     config.read('config.ini')
-    username = config['X']['username']
-    email = config['X']['email']
+    username = config['X']['username'] # "ShiityGujju"
+    email = config['X']['email'] # "zanirandzishan@gmail.com"
     password = config['X']['password']  # Replace with your actual password
 
     # Run the scraper asynchronously
