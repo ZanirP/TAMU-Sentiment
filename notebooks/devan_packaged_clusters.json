@@ -1,0 +1,502 @@
+[
+    {
+        "cluster_id": 1,
+        "documents": [
+            {
+                "Text": "Aggies win the football game in overtime. Unbelievable ending. #GigEm #AggieFootball",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Tough loss for the Aggie basketball team. We\u2019ll bounce back. #AggieHoops",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "That game was way too close. Heart can\u2019t take it. #AggieNation",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Preseason looks good for the basketball team. Let\u2019s get it this year. #AggieBasketball",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Aggie tailgates are the best part of game day. Good food, good people. #TailgateLife",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Our basketball team just isn\u2019t the same without our star player. Hope they recover soon. #GoAggies",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Game day was electric, even in the rain. Nothing like it. #AggieSpirit",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Basketball practice looked intense today. Team\u2019s putting in work. #AggiePride",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Last-second field goal to win the game. What a moment! #AggieFootball",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Aggies taking home the basketball win tonight. Great game. #Victory",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Solid defense from our football team today. They really stepped up. #AggieDefense",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Basketball season is gonna be fire if the team keeps playing like this. #AggieHoops",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Can\u2019t believe how hyped the crowd was at the game. Best atmosphere ever. #AggieFans",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Just watched the basketball team practice. Looking sharp. #AggieBball",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Aggies crush it in overtime! What a game! \ud83c\udfc8 #GigEm #12thMan",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Close one for our basketball team tonight. Proud of the fight they put up. #AggieBasketball",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Crowd went absolutely nuts when the Aggies scored that last-minute touchdown! #GameDayVibes",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Basketball practice is looking tight! Team\u2019s putting in work for sure. \ud83c\udfc0\ud83d\udd25 #AggieHoops",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Tailgating before the game was a blast! Nothing like Aggie spirit on game day. #GigEm",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Aggies take a huge W on the basketball court tonight! Love seeing the team work together. #AggieWin",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Aggie defense was on fire today! The whole stadium felt it. \ud83d\udd25 #AggieFootball",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Basketball season is gonna be one to watch if tonight was any indication. #HoopsHype",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Huge turnout at Kyle Field today! Aggies brought the energy. #HomeGame",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Aggies down by two with a minute left... and they turn it around! Unreal finish! #BasketballMagic",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Nothing beats the thrill of a last-second field goal. Still buzzing from the game! #12thMan",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Team chemistry on the basketball court tonight was off the charts! Can\u2019t wait for the next game. #AggieBball",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Aggies pull off another nail-biter. My heart can\u2019t take it! #GameDayFeels",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Basketball team grinding hard in preseason. Ready for an exciting year! #AggieNation",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Just got back from the game\u2014Aggies pulled off an insane comeback! Best night ever! \ud83c\udfc8 #GigEm",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Our basketball team is on fire this season! Can't wait for the next home game \ud83c\udfc0\ud83d\udd25 #AggieHoops",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Tailgate vibes were unreal today! Love my Aggie family \ud83e\udd73 #GameDay",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Just witnessed the most intense basketball game ever! Overtime win! \ud83c\udfc0\ud83d\ude4c #NailBiter",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Still buzzing from last night's football win! Aggie spirit is unmatched! \ud83c\udfc8\u2764\ufe0f #12thMan",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Our basketball team just keeps getting better! Playoffs, here we come! \ud83c\udfc0\ud83d\udcaa #AggiePride",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "That game-winning touchdown was everything! Still can't believe it! \ud83c\udfc8\ud83c\udf89 #AggieFootball",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Basketball practice is paying off\u2014the team's synergy is on point! \ud83c\udfc0\ud83e\udd1d #TeamWork",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "The energy at Kyle Field tonight was electric! Love being an Aggie! \ud83c\udfc8\u26a1 #GameDay",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Just scored tickets to the next basketball game! Let's go Aggies! \ud83c\udfc0\ud83c\udf9f\ufe0f #Excited",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Can't get over last night's football game! We're undefeated! \ud83c\udfc8\ud83c\udfc6 #Winning",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Big win for our basketball team tonight! Proud to be an Aggie! \ud83c\udfc0\ud83c\udf8a #Victory",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Aggie defense was unstoppable today! What a game! \ud83c\udfc8\ud83d\udcaa #DefenseWinsGames",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Preseason predictions are looking good for our basketball team. Let's make it happen! \ud83c\udfc0\u2b50 #GoAggies",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Nothing beats the feeling of a home game win! Proud to be part of this tradition \ud83c\udfc8 #AggieSpirit",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Our basketball team's teamwork is something else this year! Keep it up, guys! \ud83c\udfc0\ud83d\udc4f #TeamSpirit",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Late-night study sessions fueled by coffee and football victories \u2615\ud83c\udfc8 #CollegeLife",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "Close game tonight but our basketball team pulled through! That's resilience! \ud83c\udfc0\ud83d\udcaf #NeverGiveUp",
+                "TrueLabel": "Basketball Related"
+            },
+            {
+                "Text": "Just witnessed the loudest crowd at Kyle Field ever! My ears are still ringing! \ud83c\udfc8\ud83d\udd0a #12thMan",
+                "TrueLabel": "Football Related"
+            },
+            {
+                "Text": "That buzzer-beater shot was insane! Go Aggies! \ud83c\udfc0\ud83c\udfaf #Clutch",
+                "TrueLabel": "Basketball Related"
+            }
+        ]
+    },
+    {
+        "cluster_id": 2,
+        "documents": [
+            {
+                "Text": "Career fair was packed today. Met some great companies, hope they call back! #Networking #TAMU",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Got some solid advice from a recruiter at today\u2019s career fair. Feeling hopeful. #CareerFair",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Finally got to talk to a recruiter from Microsoft at the career fair. Fingers crossed. #TechDreams",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Career fair tip: Always have extra copies of your resume. Saved me today. #JobHunt",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Lots of opportunities at today\u2019s career fair. Hope it leads to something good. #CareerGoals",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Best part of the career fair: meeting fellow Aggies aiming high. #TAMUNetwork",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Survived the career fair! Got some leads I\u2019m excited about. #CareerFairSurvival",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Career fair was wild today\u2014so many people, so many recruiters. Hoping for good news soon! \ud83e\udd1e #AggieCareerFair",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Met a recruiter from Tesla at the career fair. Feeling inspired and hopeful! \ud83d\ude80 #DreamBig",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Career fair pro tip: Make sure you have your LinkedIn profile ready to go. Got some solid connections today! #Networking",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Career fair was overwhelming, but I got some interviews lined up. Fingers crossed! #CareerGoals",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Met some amazing people at the career fair, and I\u2019m feeling more motivated than ever. \ud83d\udcbc #AggieNetwork",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Spent all day at the career fair. Legs tired, but worth it. Made some good connections! #JobSearch",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Career fair success: Got a lead on an internship in NYC. Let\u2019s hope it works out! #InternshipHunt",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Spent all day at the career fair and landed an interview with my dream company! Fingers crossed \ud83e\udd1e #CareerGoals",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Pro tip: Always bring extra resumes to the career fair. Saved me big time today! \ud83d\udcc4 #ProfessionalTips",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Met so many awesome recruiters at the career fair today. Future's looking bright! \u2728 #Networking",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Got some solid advice from alumni at the career fair today. So grateful! \ud83d\ude4f #AggieNetwork",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Career fair was a success! Landed an internship offer! Can't wait to start! \ud83c\udf89 #Blessed",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Feeling inspired after meeting so many passionate people at the career fair \ud83d\ude0a #Motivation",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Survived my first career fair! Time to follow up on all these connections \ud83d\udce7 #JobHunt",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Best advice from the career fair: be yourself and show your passion! \ud83d\udc96 #CareerAdvice",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Can't wait to apply what I learned from the career fair workshops. Time to level up! \ud83d\udcc8 #SelfImprovement",
+                "TrueLabel": "Career Fair Related"
+            },
+            {
+                "Text": "Left the career fair feeling inspired and ready to tackle new challenges \ud83d\udcaa #Ambitious",
+                "TrueLabel": "Career Fair Related"
+            }
+        ]
+    },
+    {
+        "cluster_id": 3,
+        "documents": [
+            {
+                "Text": "Big research announcement from Texas A&M\u2014AI lab is doing incredible work. #Innovation #TAMU",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "The research lab just published findings on renewable energy. Game changer. #Sustainability",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "TAMU researchers are really out here making quantum computing breakthroughs. Impressive stuff. #Science",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "Read about TAMU\u2019s new tech for agriculture. Could change the game for farmers. #AgTech",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "TAMU\u2019s research team is making headlines with a cancer breakthrough. Proud to be an Aggie. #HealthTech",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "AI research at TAMU is taking off. Can't wait to see where it leads. #FutureTech",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "TAMU scientists are out here revolutionizing battery tech. Big respect. #TechTuesday",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "TAMU researchers just dropped a study on AI in healthcare. Super promising! #ResearchRocks #AggieScience",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "Just heard about a massive grant awarded to TAMU for renewable energy research. Let\u2019s go, Aggies! \ud83c\udf31 #GreenTech",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "Quantum computing at TAMU is making waves. So proud of what our researchers are doing. #TechBreakthrough",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "Cutting-edge cancer research coming out of TAMU. Changing the game. #AggieScience",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "Did you see TAMU's latest research on sustainable agriculture? Couldn\u2019t be prouder. #FutureFarming",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "AI research at TAMU is shaping the future. Excited to see these projects come to life. \ud83e\udd16 #TAMUInnovation",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "New discovery in TAMU\u2019s physics lab could change how we look at the universe. No big deal. \ud83c\udf0c #ScienceWin",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "Attended a mind-blowing lecture on AI at TAMU today. The future is here! \ud83e\udd16 #Research",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "The new lab in the engineering building is state-of-the-art! So excited to start my project \ud83d\udd2c #STEM",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "TAMU's research on renewable energy is so inspiring! Proud to be part of this university \ud83c\udf31 #Sustainability",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "Attended a fascinating seminar on quantum computing. TAMU is leading the way! \ud83d\udcbb #Innovation",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "So proud of TAMU's breakthrough in cancer research. Changing lives! \ud83d\udc99 #HealthTech",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "The new research facility on campus is incredible! So many opportunities ahead! \ud83e\uddea #Future",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "TAMU scientists are making strides in space exploration research. How cool is that? \ud83d\ude80 #Space",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "Just read about TAMU's latest research in biotechnology. Mind officially blown \ud83e\udd2f #Science",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "So excited about the new environmental research project starting up! Let's make a difference \ud83c\udf0d #EcoFriendly",
+                "TrueLabel": "Research Related"
+            },
+            {
+                "Text": "Proud moment seeing TAMU researchers featured in a national publication \ud83d\udcf0 #AcademicExcellence",
+                "TrueLabel": "Research Related"
+            }
+        ]
+    },
+    {
+        "cluster_id": 0,
+        "documents": [
+            {
+                "Text": "Win a free iPhone! Seriously, just click here to claim. [link] #FreeiPhone",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Crazy deal: Make $500/day from home. Check it out. [link] #SideHustle",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Earn money fast with zero experience needed! [link] #EasyMoney",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Get rich quick! Limited spots available. [link] #Wealth",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Click now for a free gift! Too good to be true? Maybe, but who cares. [link] #Giveaway",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Work from home and earn $$$. Sounds like a scam, but you never know. [link] #RemoteWork",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Quick and easy way to make money! Check this out: [link] #MoneyTips",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "\ud83d\udea8 Get rich with zero effort! Click here to find out how. [link] #EasyCash",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Congrats, you\u2019ve been selected to win a free vacation! Click to claim! [link] \ud83c\udfd6\ufe0f #GiveawayAlert",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Make thousands from home in your spare time! Find out more: [link] \ud83d\udcb0 #SideHustleLife",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Limited-time offer: Work from home and start earning big! [link] #NoExperienceNeeded",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "\ud83d\udea8 Exclusive deal: Click here to start earning money from your phone! [link] #WorkFromHome",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Win a free smartwatch today! Click the link to find out how. [link] \u23f0 #LimitedOffer",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Quick way to make money online! Check it out: [link] #MoneyHack",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Win a brand new laptop! Click here to claim yours now! [link] \ud83d\udcbb #FreeGiveaway",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Earn cash fast with this simple trick! Don't miss out! [link] \ud83d\udcb0 #MoneyHack",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Unlock your earning potential working from home! Click here! [link] \ud83c\udfe0\ud83d\udcb5 #SideHustle",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Win a free trip for two! Enter now! [link] \u2708\ufe0f\ud83c\udf34 #Contest",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Make money online effortlessly! Learn more here! [link] \ud83d\udcbb\ud83d\udcb8 #EasyCash",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Don't miss out on this exclusive offer! Click now! [link] \ud83d\udcf2 #LimitedTime",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Hurry! Limited-time offer to earn money from home! [link] \ud83d\udd52\ud83d\udcb2 #ActNow",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "You've been selected for a special reward! Claim it now! [link] \ud83c\udf81 #Rewards",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Get rich quick with this one simple step! Click here! [link] \ud83d\udc8e #FinancialFreedom",
+                "TrueLabel": "Spam"
+            },
+            {
+                "Text": "Don't miss this chance to earn extra cash! Sign up now! [link] \ud83d\udcdd #Opportunity",
+                "TrueLabel": "Spam"
+            }
+        ]
+    }
+]
