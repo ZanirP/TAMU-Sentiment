@@ -25,13 +25,19 @@ Welcome to **TAMU-Sentiment!** Our project aims to analyze and understand the se
 + **Data Visualization and Web Development:** Developing a website so that users all around Texas A&M and the world can observe the general sentiment of the Texas A&M student cohort.
 
 ## Features
++ Social media scraping
++ Text vectorization
++ Automatic clustering
++ Event label generation
++ Sentiment analysis
 
 ## Demo
 
 ## Usage
 
 ## Contributors
-
+Daniel Trinh
+Zanir Pirani
 ## Project Status
 
 ⚠️**Still in Progress**⚠️
