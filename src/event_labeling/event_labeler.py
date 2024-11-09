@@ -3,6 +3,7 @@ import torch
 import re
 from typing import List, Dict, Optional
 import json
+from collections import defaultdict
 
 class TweetEventLabeler:
     def __init__(
@@ -54,7 +55,7 @@ Respond in JSON format:
         self.model = AutoModelForCausalLM.from_pretrained(
             model_name,
             torch_dtype=torch.float32,
-            device_map=self.device
+            device_map=self.device,
         )
 
     def clean_tweet(self, tweet: str) -> str:
@@ -81,21 +82,65 @@ Respond in JSON format:
         )
         
         response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+        print(f"Model response: {response}")
         return response.strip()
 
+
     def extract_json_from_response(self, response: str) -> Dict:
-        """Extract JSON from model response."""
+        """
+        Extract JSON from model response.
+        Args:
+            response: String containing a JSON object somewhere in the text
+        Returns:
+            Dictionary containing the parsed JSON or an error object
+        """
         try:
-            # Find JSON-like structure in the response
-            match = re.search(r'\{.*\}', response, re.DOTALL)
+            pattern = r'{"event":\s*"(.*?)",\s*"confidence":\s*(\d+\.\d+),\s*"reasoning":\s*"(.*?)"}'
+    
+            # Search for the expected part in the tweet analysis output
+            match = re.search(pattern, response)
+            
             if match:
-                json_str = match.group()
-                result = json.loads(json_str)
-                return result
+                # Extract event, confidence, and reasoning
+                event = match.group(1)
+                confidence = float(match.group(2))
+                reasoning = match.group(3)
+                extracted_data = {
+                    "event": event,
+                    "confidence": confidence,
+                    "reasoning": reasoning
+                }
+                return extracted_data
             return {"event": "unk_event", "confidence": 0.0, "reasoning": "Failed to parse response"}
+
+            
+        except json.JSONDecodeError as je:
+            print(f"JSON parsing error: {je}")
+            return {
+                "event": "unk_event",
+                "confidence": 0.0,
+                "reasoning": f"JSON Parse Error: {str(je)}"
+            }
         except Exception as e:
-            print(f"Error parsing response: {e}")
-            return {"event": "unk_event", "confidence": 0.0, "reasoning": f"Error: {str(e)}"}
+            print(f"General error: {e}")
+            return {
+                "event": "unk_event",
+                "confidence": 0.0,
+                "reasoning": f"Error: {str(e)}"
+            }
+    # def extract_json_from_response(self, response: str) -> Dict:
+    #     """Extract JSON from model response."""
+    #     try:
+    #         # Find JSON-like structure in the response
+    #         match = re.search(r'\{.*\}', response, re.DOTALL)
+    #         if match:
+    #             json_str = match.group()
+    #             result = json.loads(json_str)
+    #             return result
+    #         return {"event": "unk_event", "confidence": 0.0, "reasoning": "Failed to parse response"}
+    #     except Exception as e:
+    #         print(f"Error parsing response: {e}")
+    #         return {"event": "unk_event", "confidence": 0.0, "reasoning": f"Error: {str(e)}"}
 
     def label_event(self, tweet: str, custom_instruction: str = None) -> Dict:
         """
@@ -108,26 +153,27 @@ Respond in JSON format:
         Returns:
             Dict containing event label, confidence score, and reasoning
         """
-        cleaned_tweet = self.clean_tweet(tweet)
+        # cleaned_tweet = self.clean_tweet(tweet)
         
-        if not cleaned_tweet:
-            return {"event": "unk_event", "confidence": 0.0, "reasoning": "Empty tweet after cleaning"}
+        # if not cleaned_tweet:
+        #     return {"event": "unk_event", "confidence": 0.0, "reasoning": "Empty tweet after cleaning"}
         
         # Format instruction
         instruction = custom_instruction or self.instruction_template
         prompt = instruction.format(
             events=", ".join(self.predefined_events),
-            tweet=cleaned_tweet
+            tweet=tweet
         )
         
         # Get model response
         response = self.get_model_response(prompt)
         result = self.extract_json_from_response(response)
         
+
         # Ensure required fields exist
-        result.setdefault("event", "unk_event")
-        result.setdefault("confidence", 0.0)
-        result.setdefault("reasoning", "No reasoning provided")
+        # result.setdefault("event", "unk_event")
+        # result.setdefault("confidence", 0.0)
+        # result.setdefault("reasoning", "No reasoning provided")
         
         return result
 
@@ -143,11 +189,13 @@ def main():
     
     # Custom instruction example
     custom_instruction = """
-Analyze this tweet and categorize it into one of these events: {events}
+Analyze theses tweet and categorize it into one of these events: {events}
 If none match, create a new event category that is specific but not too narrow.
 Focus on the main action or happening, not minor details.
 
-Tweet: {tweet}
+If you think the tweet looks like a spam, mark it as "spam".
+
+Tweets: {tweet}
 
 Provide your analysis as JSON:
 {{"event": "event_name", "confidence": 0.0-1.0, "reasoning": "why you chose this category"}}
@@ -159,20 +207,46 @@ Provide your analysis as JSON:
         instruction_template=custom_instruction
     )
     
-    # Example tweets
-    sample_tweets = [
-        "Breaking: Magnitude 7.2 earthquake hits coastal region, tsunami warning issued",
-        "New smartphone launch event scheduled for next week with revolutionary features",
-        "Local community organizes beach cleanup drive, hundreds participate",
-    ]
+    # # Example tweets
+    # sample_tweets = [
+    #     "Breaking: Magnitude 7.2 earthquake hits coastal region, tsunami warning issued",
+    #     "New smartphone launch event scheduled for next week with revolutionary features",
+    #     "Local community organizes beach cleanup drive, hundreds participate",
+    # ]
+    cluster_json_path = "/scratch/user/hasnat.md.abdullah/TAMU-Sentiment/src/event_labeling/packaged_clusters.json"
+    with open(cluster_json_path, "r") as f:
+        clusters = json.load(f)
     
+    for cluster in clusters: 
+        cluster_id = cluster['cluster_id']
+        documents:list = cluster['documents']
+        
+        tracker = defaultdict(int)
+        for tweet in documents:
+            result = labeler.label_event(tweet)
+            tracker[result['event']] += 1
+
+        print(f"Cluster ID: {cluster_id}")
+        print(f"tracker: {tracker}")
+        most_common_event = max(tracker, key=tracker.get)
+        print(f"Most common event: {most_common_event} with count: {tracker[most_common_event]}")
+        # print(f"result: {result}")
+        # print(f"\nTweet: {documents}")
+        # print(f"Event: {result['event']}")
+        # print(f"Confidence: {result['confidence']:.2f}")
+        # print(f"Reasoning: {result['reasoning']}")
+        # print("-" * 40)
+        break
     # Process tweets
-    for tweet in sample_tweets:
-        result = labeler.label_event(tweet)
-        print(f"\nTweet: {tweet}")
-        print(f"Event: {result['event']}")
-        print(f"Confidence: {result['confidence']:.2f}")
-        print(f"Reasoning: {result['reasoning']}")
+    # for tweet in sample_tweets:
+    #     result = labeler.label_event(tweet)
+    #     print(f"result: {result}")
+    #     print(f"\nTweet: {tweet}")
+    #     print(f"Event: {result['event']}")
+    #     print(f"Confidence: {result['confidence']:.2f}")
+    #     print(f"Reasoning: {result['reasoning']}")
+    #     print("-" * 40)
+        # break
 
 if __name__ == "__main__":
     main()
