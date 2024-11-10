@@ -1,10 +1,12 @@
+import sys
+sys.path.append("/scratch/user/hasnat.md.abdullah/TAMU-Sentiment/src/event_labeling")
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 import re
 from typing import List, Dict, Optional
 import json
 from collections import defaultdict
-
+from utils import LightweightTimeExtractor
 class TweetEventLabeler:
     def __init__(
         self,
@@ -74,7 +76,7 @@ Respond in JSON format:
         outputs = self.model.generate(
             inputs.input_ids,
             max_length=256,
-            temperature=0.7,
+            temperature=0.5,
             top_p=0.9,
             do_sample=True,
             pad_token_id=self.tokenizer.pad_token_id,
@@ -86,7 +88,7 @@ Respond in JSON format:
         return response.strip()
 
 
-    def extract_json_from_response(self, response: str) -> Dict:
+    def extract_json_from_response(self, response: str, llm_labeler=None) -> Dict:
         """
         Extract JSON from model response.
         Args:
@@ -94,6 +96,7 @@ Respond in JSON format:
         Returns:
             Dictionary containing the parsed JSON or an error object
         """
+
         try:
             pattern = r'{"event":\s*"(.*?)",\s*"confidence":\s*(\d+\.\d+),\s*"reasoning":\s*"(.*?)"}'
     
@@ -111,6 +114,11 @@ Respond in JSON format:
                     "reasoning": reasoning
                 }
                 return extracted_data
+            else:  
+                extracted_data = llm_labeler.extract_event(response)
+            if extracted_data:
+                return extracted_data
+        
             return {"event": "unk_event", "confidence": 0.0, "reasoning": "Failed to parse response"}
 
             
@@ -142,7 +150,7 @@ Respond in JSON format:
     #         print(f"Error parsing response: {e}")
     #         return {"event": "unk_event", "confidence": 0.0, "reasoning": f"Error: {str(e)}"}
 
-    def label_event(self, tweet: str, custom_instruction: str = None) -> Dict:
+    def label_event(self, tweet: str, custom_instruction: str = None, llm_labeler=None) -> Dict:
         """
         Label a tweet using the instruction-based model.
         
@@ -167,7 +175,7 @@ Respond in JSON format:
         
         # Get model response
         response = self.get_model_response(prompt)
-        result = self.extract_json_from_response(response)
+        result = self.extract_json_from_response(response,llm_labeler=llm_labeler)
         
 
         # Ensure required fields exist
@@ -178,13 +186,11 @@ Respond in JSON format:
         return result
 
 def main():
+
+    llm_labeler = LightweightTimeExtractor()
     # Example usage
     predefined_events = [
-        "natural_disaster",
-        "political_event",
-        "sports_match",
-        "entertainment_news",
-        "tech_launch"
+
     ]
     
     # Custom instruction example
@@ -192,8 +198,6 @@ def main():
 Analyze theses tweet and categorize it into one of these events: {events}
 If none match, create a new event category that is specific but not too narrow.
 Focus on the main action or happening, not minor details.
-
-If you think the tweet looks like a spam, mark it as "spam".
 
 Tweets: {tweet}
 
@@ -213,7 +217,8 @@ Provide your analysis as JSON:
     #     "New smartphone launch event scheduled for next week with revolutionary features",
     #     "Local community organizes beach cleanup drive, hundreds participate",
     # ]
-    cluster_json_path = "/scratch/user/hasnat.md.abdullah/TAMU-Sentiment/src/event_labeling/packaged_clusters.json"
+    cluster_json_path = "/scratch/user/hasnat.md.abdullah/TAMU-Sentiment/src/event_labeling/devan_packaged_clusters.json"
+    # cluster_json_path = "/scratch/user/hasnat.md.abdullah/TAMU-Sentiment/src/event_labeling/packaged_clusters.json"
     with open(cluster_json_path, "r") as f:
         clusters = json.load(f)
     
@@ -223,8 +228,10 @@ Provide your analysis as JSON:
         
         tracker = defaultdict(int)
         for tweet in documents:
-            result = labeler.label_event(tweet)
+            result = labeler.label_event(tweet["Text"], llm_labeler=llm_labeler)
             tracker[result['event']] += 1
+            print(f"tracker: {tracker}")
+            # break
 
         print(f"Cluster ID: {cluster_id}")
         print(f"tracker: {tracker}")
@@ -236,7 +243,7 @@ Provide your analysis as JSON:
         # print(f"Confidence: {result['confidence']:.2f}")
         # print(f"Reasoning: {result['reasoning']}")
         # print("-" * 40)
-        break
+        # break
     # Process tweets
     # for tweet in sample_tweets:
     #     result = labeler.label_event(tweet)
