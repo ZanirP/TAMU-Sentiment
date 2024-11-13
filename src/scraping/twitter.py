@@ -6,34 +6,66 @@ from configparser import ConfigParser
 import twikit
 from twikit import Client
 
+def save_tweets(tweets, file_path):
+    """
+    Save a list of tweets to a CSV file.
+    This function takes a list of tweets and saves them to a specified CSV file.
+    If the file already exists, the tweets are appended to the file. If the file
+    does not exist, a new file is created.
+    Parameters:
+    tweets (list): A list of tweet dictionaries to be saved.
+    file_path (str): The path to the CSV file where the tweets will be saved.
+    Returns:
+    None
+    """
 
-async def scrape_tweets(username, password):
+    # Create a DataFrame from the tweets
+    df = pd.DataFrame(tweets)
+
+    # Check if the file already exists
+    if os.path.exists(file_path):
+        # Append mode if the file exists
+        df.to_csv(file_path, mode='a', header=False, index=False)
+    else:
+        # Write mode if the file does not exist
+        df.to_csv(file_path, mode='w', header=True, index=False)
+    print(f"Saved {len(tweets)} tweets to {file_path}")
+
+async def scrape_tweets(username, password, filepath,search_query):
     client = Client('en-US')
 
     try:
         # Login using your Twitter credentials
         await client.login(auth_info_1=username, password=password)
+        tweets = []
 
         print("TIME TO SCRAPE")
 
-        timeline = await client.search_tweet('Texas A&M', 'Top')
+        timeline = await client.search_tweet(search_query, 'Top')
 
         print("GOT TIMELINE")
 
-        tweets = []
-        for tweet in timeline:
-            tweets.append({
-                'text': tweet.text,
-                'timestamp': tweet.created_at,
-                'likes': tweet.favorite_count,
-                'retweets': tweet.retweet_count,
-                # Add other fields as needed
-            })
-            print(tweet)
+        n_passes = 80 # Number of passes
+        
+        for i in range(n_passes):
+            for tweet in timeline:
+                tweets.append({
+                    'text': tweet.text,
+                    'timestamp': tweet.created_at,
+                    'likes': tweet.favorite_count,
+                    'retweets': tweet.retweet_count,
+                    # Add other fields as needed
+                })
+            print(f"pass: {i}, total tweets: \t {len(tweets)}")
+            if i % 40 == 0 and i!=0:
+                save_tweets(tweets, filepath)
+                tweets = []
+                await asyncio.sleep(900)  # Wait for 15 minutes (900 seconds)
+
+            timeline = await timeline.next()
+
 
         print("GOT TWEETS")
-
-        return tweets
 
         # Logout (optional)
         await client.logout()
@@ -41,32 +73,23 @@ async def scrape_tweets(username, password):
     except twikit.TooManyRequests as e:
         print(f"Rate limit reached: {e}")
         # Implement your rate limit handling strategy here
+        save_tweets(tweets, filepath)
 
     except Exception as e:
         print(f"An error occurred: {e}")
 
-# Read credentials from config file
-config = ConfigParser()
-config.read('config.ini')
-username = config['X']['username']
-email = config['X']['email']
-password = config['X']['password']  # Replace with your actual password
+if __name__ == '__main__':
+    # Read credentials from config file
+    config = ConfigParser()
+    config.read('/home/hasnat79/TAMU-Sentiment/config.ini')
+    username = config['X']['username']
+    email = config['X']['email']
+    password = config['X']['password']  # Replace with your actual password
 
-# Run the scraper asynchronously
-tweets = asyncio.run(scrape_tweets(username, password))
-print("scrapper ran")
+    file_path = '/home/hasnat79/TAMU-Sentiment/data/raw-data/hs_tweets_nfl_aggies_hashtags.csv'
 
-# Add tweets to a CSV file
-# Define the file path
-file_path = 'tweets.csv'
+    search_query = '#GigEm #NFLAggies'
 
-# Create a DataFrame from the tweets
-df = pd.DataFrame(tweets)
-
-# Check if the file already exists
-if os.path.exists(file_path):
-    # Append mode if the file exists
-    df.to_csv(file_path, mode='a', header=False, index=False)
-else:
-    # Write mode if the file does not exist
-    df.to_csv(file_path, mode='w', header=True, index=False)
+    # Run the scraper asynchronously
+    tweets = asyncio.run(scrape_tweets(username, password,file_path, search_query))
+    print("scrapper ran")
