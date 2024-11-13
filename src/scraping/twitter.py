@@ -81,14 +81,14 @@ async def scrape_tweets(username, password, filepath,search_query):
 if __name__ == '__main__':
     # Read credentials from config file
     config = ConfigParser()
-    config.read('/home/hasnat79/TAMU-Sentiment/config.ini')
+    config.read('config.ini')
     username = config['X']['username']
     email = config['X']['email']
     password = config['X']['password']  # Replace with your actual password
 
-    file_path = '/home/hasnat79/TAMU-Sentiment/data/raw-data/hs_tweets_nfl_aggies_hashtags.csv'
+    file_path = 'data/raw-data/raw_tweets.csv'
 
-    search_query = '#GigEm #NFLAggies'
+    search_query = '#GigEm #Aggies #TAMU'
 
     # Run the scraper asynchronously
     tweets = asyncio.run(scrape_tweets(username, password,file_path, search_query))

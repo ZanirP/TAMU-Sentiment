@@ -144,7 +144,11 @@ def identify_event(text):
     """    
     # Fallback keyword search for known events
     for event in events.keys():
+<<<<<<< HEAD
         if event.lower() in str(text).lower(): # used str() to convert numberical vals to string
+=======
+        if event.lower() in text.lower():
+>>>>>>> Zanir_Examples
             return event
         
     return "Other / Unknown"
@@ -225,7 +229,7 @@ def get_concat_data_frame_from_data_dir (data_dir):
     
     return df
 
-def preprocess_on_hasnat_data(hasnat_data_dir, output_dir_path, ignore_nan = True):
+def preprocess_on_data(data_dir, output_dir_path, ignore_nan = True):
     """
     Preprocess the data in the hasnat_data_dir and save it to the output_file_path
     
@@ -236,8 +240,13 @@ def preprocess_on_hasnat_data(hasnat_data_dir, output_dir_path, ignore_nan = Tru
     Returns:
         None
     """
-    output_file_path = os.path.join(output_dir_path, "hasnat_data_preprocessed.csv")
-    df = get_concat_data_frame_from_data_dir(hasnat_data_dir)
+    output_file_path = os.path.join(output_dir_path, "data_preprocessed.csv")
+    
+    # Get all CSV files in the data_dir and its subdirectories
+    files = glob.glob(os.path.join(data_dir, '**', '*.csv'), recursive=True)
+    
+    df_list = [pd.read_csv(file_path) for file_path in files]
+    df = pd.concat(df_list, ignore_index=True)
     
     global events
     events = build_event_dictionary(df)
@@ -252,42 +261,13 @@ def preprocess_on_hasnat_data(hasnat_data_dir, output_dir_path, ignore_nan = Tru
     grouped_and_preprocessed_df.to_csv(output_file_path)
 
 
-def preprocess_on_zanir_data(zanir_data_dir, output_dir_path, ignore_nan=True):
-    """
-    Preprocess the data in the zanir_data_dir and save it to the output_file_path
-    
-    Args:
-        zanir_data_dir (str): The directory containing the csv files
-        output_file_path (str): The file path to save the preprocessed data
-    
-    Returns:
-        None
-    """
-    output_file_path = os.path.join(output_dir_path, "zanir_data_preprocessed.csv")
-    df = get_concat_data_frame_from_data_dir(zanir_data_dir)
-    
-    global events
-    events = build_event_dictionary(df)
-    print(f"events.keys(): {events.keys()}")
-    df['event'] = df['text'].apply(identify_event)
-    
-    grouped_and_preprocessed_df = group_and_preprocess(df)
 
-    if ignore_nan:
-        grouped_and_preprocessed_df = grouped_and_preprocessed_df[~grouped_and_preprocessed_df['preprocessed_text'].str.contains("nan")]
-        output_file_path = output_file_path.replace(".csv", "_without_nan.csv")
-    
-    grouped_and_preprocessed_df.to_csv(output_file_path)
         
 if __name__ == "__main__":
-    output_dir_path = "/home/hasnat79/TAMU-Sentiment/data/processed-data/"
-    ## zanir_data
-    zanir_data_dir = "/home/hasnat79/TAMU-Sentiment/data/raw-data/zanir_data"
-    preprocess_on_zanir_data(zanir_data_dir, output_dir_path, ignore_nan=True)
-    ## hasnat_data
-    hasnat_data_dir = "/home/hasnat79/TAMU-Sentiment/data/raw-data/hasnat_data"
-    preprocess_on_hasnat_data(hasnat_data_dir, output_dir_path, ignore_nan=True)
-    # TODO Figure out a way to deal with the inaccuracy of this method
+    output_dir_path = "/data/processed-data/"
+    ## DATA
+    data_dir = "/data/raw-data/"
+    preprocess_on_data(data_dir, output_dir_path, ignore_nan = True)
     
 
 

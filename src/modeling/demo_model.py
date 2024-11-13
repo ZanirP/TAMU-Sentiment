@@ -129,7 +129,7 @@ if __name__ == "__main__":
 	# nltk.download('all') # If you don't like the rest of it!
 	
     analyzer = SentimentIntensityAnalyzer()
-    preprocessed_data_dir = '/home/hasnat79/TAMU-Sentiment/data/processed-data'
+    preprocessed_data_dir = 'data/processed-data'
     data_files = glob.glob(os.path.join(preprocessed_data_dir, "*.csv"))
 
     for file in data_files:
