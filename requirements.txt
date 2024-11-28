@@ -14,7 +14,6 @@ charset-normalizer==3.3.2
 click==8.1.7
 cloudpathlib==0.19.0
 comm==0.2.2
-command-not-found==0.3
 confection==0.1.5
 contourpy==1.3.0
 cryptography==3.4.8
@@ -25,7 +24,6 @@ debugpy==1.8.7
 decorator==5.1.1
 distlib==0.3.8
 distro==1.7.0
-distro-info==1.1+ubuntu0.1
 en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl#sha256=86cc141f63942d4b2c5fcee06630fd6f904788d2f0ab005cce45aadb8fb73889
 et-xmlfile==1.1.0
 exceptiongroup==1.2.2
@@ -113,7 +111,6 @@ PyGObject==3.42.1
 PyJWT==2.3.0
 pyotp==2.9.0
 pyparsing==2.4.7
-python-apt==2.4.0+ubuntu2
 python-dateutil==2.9.0.post0
 pytz==2024.2
 PyYAML==5.4.1
@@ -158,9 +155,6 @@ twikit==2.1.3
 typer==0.12.5
 typing_extensions==4.12.2
 tzdata==2024.1
-ubuntu-advantage-tools==8001
-ufw==0.36.1
-unattended-upgrades==0.1
 urllib3==2.2.3
 vaderSentiment==3.3.2
 virtualenv==20.26.4
