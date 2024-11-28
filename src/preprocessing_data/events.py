@@ -1,5 +1,4 @@
 import pandas as pd
-import spacy
 from collections import defaultdict
 import re
 import os
