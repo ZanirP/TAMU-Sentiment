@@ -73,9 +73,9 @@ def scheduled_job():
     with open('config.ini', 'r') as config_file:
         config.read_file(config_file)
     
-    username = config['X']['username']  # "ShiityGujju"
-    email = config['X']['email']  # "zanirandzishan@gmail.com"
-    password = config['X']['password']  # Replace with your actual password
+    username = st.secrets['X']["username"]
+    email = st.secrets['X']['email'] 
+    password = st.secrets['X']['password'] 
     tracker = tracker + 1
     # Scrape Twitter data
     loop = asyncio.new_event_loop()

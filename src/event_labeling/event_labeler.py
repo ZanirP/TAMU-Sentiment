@@ -59,7 +59,6 @@ Respond in JSON format:
         self.model = AutoModelForCausalLM.from_pretrained(model_name,
                                                           trust_remote_code=True,
                                                           torch_dtype=torch.float16,
-                                                          trust_remote_code=True
                                                         ).to(self.device)
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
 
