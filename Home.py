@@ -15,6 +15,12 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from fuzzywuzzy import fuzz, process
 
 
+st.set_page_config(
+    page_title="TAMU Sentiment Analysis",
+    page_icon="📊",
+    layout="wide",
+)
+
 # Title and Introduction
 st.title("Welcome to TAMU Sentiment Analysis")
 st.write("Your go-to app for analyzing the sentiment of Texas A&M University-related content.")

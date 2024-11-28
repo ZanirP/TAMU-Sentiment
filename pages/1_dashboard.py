@@ -11,7 +11,7 @@ data = pd.read_csv(OUTPUT_FILE)
 # Set page configuration
 st.set_page_config(
     page_title="Dashboard",
-    page_icon="📈",
+    page_icon="📈"
 )
 
 # Title and Introduction
