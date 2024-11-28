@@ -11,6 +11,7 @@ import os
 import glob
 
 # Initialize the VADER sentiment analyzer
+analyzer = SentimentIntensityAnalyzer()
 
 def preprocess_text(text):
     """
@@ -51,6 +52,7 @@ def get_sentiment_score(text):
     float: The compound sentiment score, a value between -1 (most negative) 
            and 1 (most positive).
     """
+
     if not isinstance(text, str):
         return 0.0
     return analyzer.polarity_scores(text)['compound']

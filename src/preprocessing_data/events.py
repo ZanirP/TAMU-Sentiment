@@ -144,11 +144,7 @@ def identify_event(text):
     """    
     # Fallback keyword search for known events
     for event in events.keys():
-<<<<<<< HEAD
         if event.lower() in str(text).lower(): # used str() to convert numberical vals to string
-=======
-        if event.lower() in text.lower():
->>>>>>> Zanir_Examples
             return event
         
     return "Other / Unknown"

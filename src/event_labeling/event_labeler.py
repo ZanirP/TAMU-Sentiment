@@ -1,12 +1,12 @@
 import sys
-sys.path.append("/scratch/user/hasnat.md.abdullah/TAMU-Sentiment/src/event_labeling")
+#sys.path.append("/src/event_labeling")
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 import re
 from typing import List, Dict, Optional
 import json
 from collections import defaultdict
-from utils import LightweightTimeExtractor
+from src.event_labeling.utils import LightweightTimeExtractor
 class TweetEventLabeler:
     def __init__(
         self,
@@ -51,14 +51,17 @@ Respond in JSON format:
 {{"event": "event_name", "confidence": confidence_score, "reasoning": "brief explanation"}}
 """
         
-        # Initialize model and tokenizer
+        # Directory to save the model
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        model_name = "microsoft/phi-2"
+
+        # Load the model and tokenizer from the saved directory
+        self.model = AutoModelForCausalLM.from_pretrained(model_name,
+                                                          trust_remote_code=True,
+                                                          torch_dtype=torch.float16,
+                                                          trust_remote_code=True
+                                                        ).to(self.device)
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
-        self.model = AutoModelForCausalLM.from_pretrained(
-            model_name,
-            torch_dtype=torch.float32,
-            device_map=self.device,
-        )
 
     def clean_tweet(self, tweet: str) -> str:
         """Clean tweet text by removing URLs, mentions, and special characters."""
@@ -217,7 +220,7 @@ Provide your analysis as JSON:
     #     "New smartphone launch event scheduled for next week with revolutionary features",
     #     "Local community organizes beach cleanup drive, hundreds participate",
     # ]
-    cluster_json_path = "/scratch/user/hasnat.md.abdullah/TAMU-Sentiment/src/event_labeling/devan_packaged_clusters.json"
+    cluster_json_path = "src/event_labeling/devan_packaged_clusters.json"
     # cluster_json_path = "/scratch/user/hasnat.md.abdullah/TAMU-Sentiment/src/event_labeling/packaged_clusters.json"
     with open(cluster_json_path, "r") as f:
         clusters = json.load(f)
