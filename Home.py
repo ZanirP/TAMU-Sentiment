@@ -11,7 +11,6 @@ from configparser import ConfigParser
 from src.event_labeling.event_labeler import TweetEventLabeler
 from src.event_labeling.utils import LightweightTimeExtractor
 import os
-from src.modeling.demo_model import get_sentiment_score
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from fuzzywuzzy import fuzz, process
 
@@ -51,6 +50,22 @@ except LookupError:
     nltk.download("vader_lexicon")
 
     analyzer = SentimentIntensityAnalyzer()
+    
+def get_sentiment_score(text):
+    """
+    Calculate the compound sentiment score for the given text using VADER.
+
+    Parameters:
+    text (str): The input text for which the sentiment score is to be calculated.
+
+    Returns:
+    float: The compound sentiment score, a value between -1 (most negative) 
+           and 1 (most positive).
+    """
+
+    if not isinstance(text, str):
+        return 0.0
+    return analyzer.polarity_scores(text)['compound']
     
 labeler = TweetEventLabeler(
         predefined_events=predefined_events,
