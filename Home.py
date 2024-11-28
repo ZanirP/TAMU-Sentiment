@@ -115,8 +115,7 @@ labeler = TweetEventLabeler(
         instruction_template=custom_instruction
 )
 
-# Set the page configuration
-st.set_page_config(page_title="TAMU Sentiment Analysis", page_icon="📊")
+
 
 def process_tweet(tweet):
     result = labeler.label_event(tweet, llm_labeler=llm_labeler)
