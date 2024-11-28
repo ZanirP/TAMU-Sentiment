@@ -15,6 +15,9 @@ from src.modeling.demo_model import get_sentiment_score
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from fuzzywuzzy import fuzz, process
 
+import nltk
+nltk.download('vader_lexicon', download_dir='nltk_data')
+
 print("Hello World")
 model_path = os.path.expanduser("~/.cache/huggingface/transformers/microsoft/phi-2")
 if os.path.exists(model_path):
@@ -43,10 +46,11 @@ print("Starting to label tweets")
 
 try:
     nltk.data.find("vader_lexicon.zip")
+    analyzer = SentimentIntensityAnalyzer()
 except LookupError:
     nltk.download("vader_lexicon")
 
-analyzer = SentimentIntensityAnalyzer()
+    analyzer = SentimentIntensityAnalyzer()
     
 labeler = TweetEventLabeler(
         predefined_events=predefined_events,
