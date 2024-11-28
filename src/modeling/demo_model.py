@@ -129,6 +129,10 @@ def organize_and_save_plot(xlabel, ylabel, title, save_directory, file_name, x_r
 
 if __name__ == "__main__":
 	# nltk.download('all') # If you don't like the rest of it!
+    try:
+        nltk.data.find("sentiment/vader_lexicon.zip")
+    except LookupError:
+        nltk.download("vader_lexicon")
 	
     analyzer = SentimentIntensityAnalyzer()
     preprocessed_data_dir = 'data/processed-data'

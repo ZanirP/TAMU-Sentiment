@@ -41,6 +41,11 @@ Respond in JSON format:
     
 print("Starting to label tweets")
 
+try:
+    nltk.data.find("sentiment/vader_lexicon.zip")
+except LookupError:
+    nltk.download("vader_lexicon")
+
 analyzer = SentimentIntensityAnalyzer()
     
 labeler = TweetEventLabeler(
